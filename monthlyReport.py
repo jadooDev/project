@@ -1,3 +1,9 @@
+from dataAndAnalytics import generate_insights
+from dataAndAnalytics import calculate_monthly_spending
+from expenseCategorization import categorize_transactions
+from transactions import transactions
+
+
 def generate_monthly_report(monthly_spending): 
     report = "Your Monthly Spending Report\n" # Header for report
     

@@ -1,4 +1,4 @@
 /.DS_Store
 /app Diagram.pptx
 /plan.txt
-/.venv
+venv/

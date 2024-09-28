@@ -45,11 +45,15 @@ for category in categories:
     
     # Display the result
     print(f"\nIn the {category} category:")
-    if percentile_rank >= 90:
+    if percentile_rank == 100:
+        print("You are the top spender in the " + category + " category!")
+    elif percentile_rank >= 90:
         print(f"You are in the top {100 - percentile_rank:.2f}% of spenders (spending more than {percentile_rank:.2f}% of users).")
     elif percentile_rank >= 50:
         print(f"You spend more than {percentile_rank:.2f}% of users.")
-    else:
+    elif percentile_rank > 0:
         print(f"You spend less than {100 - percentile_rank:.2f}% of users.")
+    else:
+        print("You are the top saver in the " + category + " category!")
 
 # Example output logic continues here...

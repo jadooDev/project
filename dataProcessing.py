@@ -18,13 +18,6 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Group the other users' data by Category and calculate the average spending
-average_spending = df.groupby('Category')['Amount'].mean()
-
-# Display the average spending for other users
-print("Average spending of other users by category:")
-print(average_spending)
-
 # Function to get the user's spending input
 def get_user_spending(categories):
     user_spending = {}
@@ -40,19 +33,23 @@ user_spending = get_user_spending(categories)
 # Convert user spending into a DataFrame for comparison
 user_df = pd.DataFrame(list(user_spending.items()), columns=['Category', 'Amount'])
 
-# Merge user spending with the average spending for comparison
-comparison_df = user_df.merge(average_spending.reset_index(), on='Category', suffixes=('_User', '_Average'))
-
-# Calculate the percentage difference between user spending and the average
-comparison_df['Percentage_Difference'] = ((comparison_df['Amount_User'] - comparison_df['Amount_Average']) / comparison_df['Amount_Average']) * 100
-
-# Display the comparison
-print("\nComparison of your spending vs average spending by other users:")
-print(comparison_df[['Category', 'Amount_User', 'Amount_Average', 'Percentage_Difference']])
-
-# Provide insights on whether the user's spending is higher or lower
-for _, row in comparison_df.iterrows():
-    if row['Percentage_Difference'] > 0:
-        print(f"\nYou are spending {row['Percentage_Difference']:.2f}% more than the average user on {row['Category']}.")
+# Loop through each category and compare the user's spending with others
+print("\nRanking of your spending vs the rest of the users:")
+for category in categories:
+    # Get spending data for the category
+    category_spending = df[df['Category'] == category]['Amount']
+    
+    # Calculate the user's rank based on percentile
+    user_amount = user_spending[category]
+    percentile_rank = np.sum(category_spending < user_amount) / len(category_spending) * 100
+    
+    # Display the result
+    print(f"\nIn the {category} category:")
+    if percentile_rank >= 90:
+        print(f"You are in the top {100 - percentile_rank:.2f}% of spenders (spending more than {percentile_rank:.2f}% of users).")
+    elif percentile_rank >= 50:
+        print(f"You spend more than {percentile_rank:.2f}% of users.")
     else:
-        print(f"\nYou are spending {-row['Percentage_Difference']:.2f}% less than the average user on {row['Category']}.")
+        print(f"You spend less than {100 - percentile_rank:.2f}% of users.")
+
+# Example output logic continues here...

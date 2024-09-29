@@ -24,7 +24,7 @@ user_df = pd.DataFrame(list(user_spending.items()), columns=['Category', 'Amount
 print("\nRanking of your spending vs the rest of the users:")
 for category in categories:
     # Get spending data for the category
-    category_spending = transactions_df[transactions_df['Category'] == category]['Amount']
+    category_spending = transactions_df[transactions_df['category'] == category]['amount']
     
     # Calculate the user's rank based on percentile
     user_amount = user_spending[category]

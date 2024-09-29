@@ -17,8 +17,7 @@ for _ in range(1000):
     transaction = {
         'name': f'Transaction {_}',
         'amount': round(random.uniform(5, 200), 2),
-        'category': random.choice(categories),
+        'category': random.choice(list(categories.keys())),
         'date': (datetime.now() - timedelta(days=random.randint(0, 30))).strftime('%Y-%m-%d')
     }
     transactions.append(transaction)
-

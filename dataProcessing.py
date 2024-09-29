@@ -20,6 +20,9 @@ user_spending = get_user_spending(categories)
 # Convert user spending into a DataFrame for comparison
 user_df = pd.DataFrame(list(user_spending.items()), columns=['Category', 'Amount'])
 
+# Create a list to store the user's percentile ranks
+percentile_ranks = []
+
 # Loop through each category and compare the user's spending with others
 print("\nRanking of your spending vs the rest of the users:")
 for category in categories:
@@ -29,12 +32,11 @@ for category in categories:
     # Calculate the user's rank based on percentile
     user_amount = user_spending[category]
     percentile_rank = np.sum(category_spending < user_amount) / len(category_spending) * 100
+    percentile_ranks.append(percentile_rank)
     
     # Display the result
     print(f"\nIn the {category} category:")
-    if percentile_rank >= 90:
-        print(f"You are in the top {100 - percentile_rank:.2f}% of spenders (spending more than {percentile_rank:.2f}% of users).")
-    elif percentile_rank >= 50:
+    if percentile_rank >= 50:
         print(f"You spend more than {percentile_rank:.2f}% of users.")
     else:
         print(f"You spend less than {100 - percentile_rank:.2f}% of users.")

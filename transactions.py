@@ -12,8 +12,8 @@ categories = {
 
 transactions = []
 
-# Create 10 random transactions
-for _ in range(1000):
+
+for _ in range(10000):
     transaction = {
         'name': f'Transaction {_}',
         'amount': round(random.uniform(5, 200), 2),

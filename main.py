@@ -2,6 +2,7 @@ from transactions import transactions
 from expenseCategorization import categorize_transactions
 from dataAndAnalytics import calculate_monthly_spending
 from monthlyReport import generate_monthly_report
+from dataProcessing import calculate_category_percentiles, generate_spending_comparison_report
 
 def main():
     # Step 1: Categorize the transactions

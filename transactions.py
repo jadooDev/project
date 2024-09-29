@@ -1,7 +1,7 @@
 import random
 from datetime import datetime, timedelta
 
-from dataProcessing import categories
+categories = ['Food', 'Transport', 'Entertainment', 'Shopping', 'Bills', 'Others']
 
 transactions = []
 

@@ -17,6 +17,8 @@ def get_user_spending(categories):
 # Get user spending input
 user_spending = get_user_spending(categories)
 
+
+
 # Convert user spending into a DataFrame for comparison
 user_df = pd.DataFrame(list(user_spending.items()), columns=['Category', 'Amount'])
 

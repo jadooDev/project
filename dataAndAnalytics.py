@@ -1,5 +1,6 @@
 import datetime
 from collections import defaultdict
+from dataProcessing import get_user_spending, transactions, categories
 
 #Calculate monthly expenses
 def calculate_monthly_spending(transactions):
@@ -66,7 +67,6 @@ def generate_insights(monthly_spending):
                     insights.append(f"  - In {month}, you spent ${current_amount:.2f} on {category}, which is a decrease of {abs(category_percentage_change):.2f}% from {previous_month}.")
                 else:
                     insights.append(f"  - In {month}, you spent the same amount on {category} as in {previous_month}: ${current_amount:.2f}.")
-
     return insights
 
     

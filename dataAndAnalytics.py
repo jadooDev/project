@@ -6,9 +6,15 @@ def calculate_monthly_spending(transactions):
     monthly_spending = defaultdict(lambda: defaultdict(float)) # defaultdict creates dictionary where each month maps to a category dictionary initialized to 0.0
 
     for txn in transactions: # loop that iterates over list of transactions
-        txn_date = datetime.datetime.strptime(txn['date'], '%Y-%m-%d') # convert the string of the transaction's date into datetime object
+        txn_date_str = txn.get('date')  # Safely get the 'date' key from the transaction dictionary
+        if txn_date_str:  # Check if the date is not None
+            txn_date = datetime.datetime.strptime(txn_date_str, '%Y-%m-%d')  # Convert the string of the transaction's date into datetime object
+        else:
+            continue  # Skip this transaction if the date is missing
         month = txn_date.strftime('%Y-%m') # extracts year and month from txn_date and convert it to a datetime object
         monthly_spending[month][txn['category']] += txn['amount'] #update monthly_spending to accumulate the total amount spent in that month
+    
+    return monthly_spending # return the monthly spending dictionary
         
 # Generate insights
 def generate_insights(monthly_spending): 

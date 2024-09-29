@@ -13,7 +13,7 @@ categories = {
 transactions = []
 
 # Create 10 random transactions
-for _ in range(10):
+for _ in range(1000):
     transaction = {
         'name': f'Transaction {_}',
         'amount': round(random.uniform(5, 200), 2),
@@ -22,4 +22,3 @@ for _ in range(10):
     }
     transactions.append(transaction)
 
-print(transactions)
